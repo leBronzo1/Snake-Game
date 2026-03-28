@@ -87,6 +87,19 @@ Open `.vscode/tasks.json` and update the following paths to match your machine:
   ]
 }
 ```
+
+### 6. (Optional) Update `c_cpp_properties.json`
+
+Open `.vscode/c_cpp_properties.json` and update the SFML include path and compiler path to match your machine:
+```json
+"includePath": [
+  "${workspaceFolder}/**",
+  "C:/path/to/SFML-3.0.2/include"
+],
+"compilerPath": "C:/path/to/mingw64/bin/g++"
+```
+
+> This file only affects IntelliSense (autocomplete, red squiggles) in VS Code — it has no effect on building or running the game.
  
 Replace `C:/path/to/mingw64` and `C:/path/to/SFML-3.0.2` with the actual paths on your machine.
  
@@ -134,12 +147,6 @@ Snake-Game/
 ├── .gitignore
 └── README.md
 ```
- 
----
- 
-## Why so many DLLs?
- 
-C++ doesn't have a package manager like `npm`. Instead, libraries like SFML are linked manually and their `.dll` files must be distributed alongside the executable. The MinGW runtime DLLs (`libstdc++`, etc.) are the C++ standard library — the equivalent of the Node.js runtime.
  
 ---
  
