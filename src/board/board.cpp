@@ -1,16 +1,33 @@
 #include "board.hpp"
 
 Board::Board() {
+    std::random_device rd;
+    gen = std::mt19937(rd());
+    distr = std::uniform_int_distribution<int>(0, GRID_SIZE - 1);
+
     for(int i = 0; i < GRID_SIZE; i++) {
         for(int j = 0; j < GRID_SIZE; j++) {
             grid[i][j] = square::empty;
         }
     }
+    spawnFood();
 }
 
 void Board::spawnFood() {
-    std::srand(std::time(nullptr));
+    int r, c;
+    bool placed = false;
 
+    while (!placed) {
+        // Coordinate Generation
+        r = distr(gen); 
+        c = distr(gen);
+
+        if (grid[r][c] == square::empty) {
+            grid[r][c] = square::fruit;
+            fruitPos = {r, c}; // Keep track of fruit position
+            placed = true;
+        }
+    }
 }
 
 bool Board::isFood(sf::Vector2i pos) {
