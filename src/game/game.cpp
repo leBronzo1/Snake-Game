@@ -5,11 +5,7 @@ void Game::initVars() {
 }
 
 void Game::initWindow() {
-    this->window = new sf::RenderWindow(
-        sf::VideoMode({600, 600}), 
-        "Snake Game", 
-        sf::Style::Titlebar | sf::Style::Close
-    );
+    this->window = new sf::RenderWindow(sf::VideoMode({600, 600}), "Snake Game", sf::Style::Titlebar | sf::Style::Close);
 }
 
 void Game::pollEvents() {
@@ -30,7 +26,8 @@ void Game::update() {
 }
 
 void Game::render() {
-    this->window->clear(sf::Color::Blue);
+    this->window->clear(sf::Color(20, 20, 20));
+    b.render(*this->window);
     this->window->display();
 }
 

@@ -1,6 +1,6 @@
 #pragma once
 
-#include <SFML/Graphics.hpp>
+#include "../board/board.hpp"
 #include <SFML/Audio.hpp>
 #include <SFML/Network.hpp>
 
@@ -10,6 +10,9 @@ class Game {
     private:
         // Window
         sf::RenderWindow* window;
+
+        // Board - handles rendering for the board and updating the elements of the board
+        Board b;
 
         // Initialize variables
         void initVars();
