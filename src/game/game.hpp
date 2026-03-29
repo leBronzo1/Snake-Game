@@ -25,16 +25,16 @@ class Game {
         Board b;
 
         // Font var
-        sf::Font font;
+        sf::Font *font;
 
         // The title text
-        sf::Text titleText;
+        sf::Text *titleText;
 
         // Text that pops up to denote text
-        sf::Text startText;
+        sf::Text *startText;
 
         // Text that pops up when game is over
-        sf::Text gameOverText;
+        sf::Text *gameOverText;
 
         // Initialize variables
         void initVars();
