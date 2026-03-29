@@ -40,5 +40,9 @@ class Snake {
         // Boolean return that keeps track of status of snake
         bool retAlive() {return alive;}
 
-        sf::Vector2i getHead() const;
+        // Gets head from body
+        sf::Vector2i getHead() const {return body.front();}
+
+        // Changes dirrection of snake
+        void setDirection(Direction dir);
 };

@@ -97,3 +97,12 @@ void Board::render(sf::RenderWindow &window) {
         }
     }
 }
+
+void Board::pause() {
+    for (int i = 0; i < GRID_SIZE; i++)
+        for (int j = 0; j < GRID_SIZE; j++)
+            grid[i][j] = square::empty;
+
+    snake = Snake();
+    spawnFood();
+}

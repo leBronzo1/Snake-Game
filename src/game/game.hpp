@@ -51,9 +51,14 @@ class Game {
         // Handle window/keyboard events
         void pollEvents();
 
+        // Game clock
         sf::Clock clock;
+
+        // Tracks time since snake moved
         float moveTimer = 0.f;
-        float moveInterval = 0.15f; // move every 0.15 seconds
+
+        // Moves every 0.15 seconds
+        float moveInterval = 0.15f;
     public:
         // Constructor
         Game();

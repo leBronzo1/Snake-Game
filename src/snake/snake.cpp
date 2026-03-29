@@ -20,6 +20,11 @@ void Snake::updatePos() {
     body.pop_back();          // remove tail
 }
 
-sf::Vector2i Snake::getHead() const {
-    return body.front();
+
+void Snake::setDirection(Direction dir) {
+    if (dir == Direction::Up && cDirr == Direction::Down) return;
+    if (dir == Direction::Down && cDirr == Direction::Up) return;
+    if (dir == Direction::Left && cDirr == Direction::Right) return;
+    if (dir == Direction::Right && cDirr == Direction::Left) return;
+    cDirr = dir;
 }

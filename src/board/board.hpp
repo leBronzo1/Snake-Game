@@ -50,4 +50,10 @@ class Board {
 
         // Draw the grid and food
         void render(sf::RenderWindow& window);
+
+        // Returns a reference to the snake for direction input
+        Snake& getSnake() { return snake; }
+
+        // pauses board and brings to menu
+        void pause();
 };

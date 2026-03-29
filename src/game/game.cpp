@@ -43,7 +43,6 @@ void Game::initWindow() {
 }
 
 
-// Finish menu from this point downwards
 void Game::pollEvents() {
     while (const auto event = this->window->pollEvent()) {
         if (event->is<sf::Event::Closed>())
@@ -56,12 +55,23 @@ void Game::pollEvents() {
                         this->state = GameState::inGame;
                     break;
                 case GameState::inGame:
+                    if (key->code == sf::Keyboard::Key::Up)
+                        b.getSnake().setDirection(Direction::Up);
+                    if (key->code == sf::Keyboard::Key::Down)
+                        b.getSnake().setDirection(Direction::Down);
+                    if (key->code == sf::Keyboard::Key::Left)
+                        b.getSnake().setDirection(Direction::Left);
+                    if (key->code == sf::Keyboard::Key::Right)
+                        b.getSnake().setDirection(Direction::Right);
                     if (key->code == sf::Keyboard::Key::Escape)
                         this->state = GameState::Menu;
                     break;
                 case GameState::GameOver:
-                    if (key->code == sf::Keyboard::Key::Enter)
+                    if (key->code == sf::Keyboard::Key::Enter) {
+                        b.pause();
+                        moveTimer = 0.f;
                         this->state = GameState::inGame;
+                    }
                     if (key->code == sf::Keyboard::Key::Escape)
                         this->state = GameState::Menu;
                     break;
