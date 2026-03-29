@@ -37,31 +37,38 @@ bool Board::update() {
 
     sf::Vector2i head = snake.getHead();
 
-    if (head.x < 0 || head.x >= GRID_SIZE || head.y < 0 || head.y >= GRID_SIZE) {
-        return true; // game over
+    // Wall collision
+    if (head.x < 0 || head.x >= GRID_SIZE || head.y < 0 || head.y >= GRID_SIZE)
+        return true;
+
+    // Self collision
+    std::deque<sf::Vector2i> body = snake.retVec();
+    for (int i = 1; i < body.size(); i++) {
+        if (body[i] == head)
+            return true;
     }
 
-    std::deque<sf::Vector2i> body = snake.retVec();
+    // Fruit collision
+    if (head == fruitPos) {
+        snake.grow();
+        spawnFood();
+    }
 
+    // Win condition — snake fills the board
+    if (body.size() == GRID_SIZE * GRID_SIZE)
+        return true; // handle as win in Game
+
+    // Update grid
     for (int x = 0; x < GRID_SIZE; x++) {
         for (int y = 0; y < GRID_SIZE; y++) {
             sf::Vector2i pos(x, y);
-
             bool isSnake = false;
             for (const auto& segment : body) {
-                if (segment == pos) {
-                    isSnake = true;
-                    break;
-                }
+                if (segment == pos) { isSnake = true; break; }
             }
-
-            if (isSnake) {
-                grid[x][y] = square::snaked;
-            } else if (pos == fruitPos) {
-                grid[x][y] = square::fruit;
-            } else {
-                grid[x][y] = square::empty;
-            }
+            if (isSnake) grid[x][y] = square::snaked;
+            else if (pos == fruitPos) grid[x][y] = square::fruit;
+            else grid[x][y] = square::empty;
         }
     }
 

@@ -7,7 +7,7 @@ Snake::Snake() {
 }
 
 void Snake::updatePos() {
-    sf::Vector2i newHead = body.front(); // copy current head
+    sf::Vector2i newHead = body.front();
 
     switch(cDirr) {
         case Direction::Up:    newHead += sf::Vector2i(0, -1); break;
@@ -16,8 +16,12 @@ void Snake::updatePos() {
         case Direction::Down:  newHead += sf::Vector2i(0,  1); break;
     }
 
-    body.push_front(newHead); // add new head
-    body.pop_back();          // remove tail
+    body.push_front(newHead);
+    if (growing) {
+        growing = false; // keep tail, body grows by 1
+    } else {
+        body.pop_back(); // normal move, remove tail
+    }
 }
 
 

@@ -25,8 +25,8 @@ class Snake {
         // Current direction
         Direction cDirr;
 
-        // Boolean that denotes whether the snake is alive(Just a bool to send things into game over)
-        bool alive;
+        // Boolean that denotes whether the snake is growing
+        bool growing = false;
     public:
         // Constructor
         Snake();
@@ -37,12 +37,12 @@ class Snake {
         // Returns the snake to update board
         std::deque<sf::Vector2i> retVec() {return body;};
 
-        // Boolean return that keeps track of status of snake
-        bool retAlive() {return alive;}
-
         // Gets head from body
         sf::Vector2i getHead() const {return body.front();}
 
         // Changes dirrection of snake
         void setDirection(Direction dir);
+
+        // Returns whether the snake is growing or not
+        void grow() {growing = true;}
 };

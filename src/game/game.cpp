@@ -23,19 +23,25 @@ void Game::initText() {
     this->titleText->setString("SNAKE");
     this->titleText->setCharacterSize(60);
     this->titleText->setFillColor(sf::Color::Green);
-    // Center it
     sf::FloatRect bounds = this->titleText->getLocalBounds();
     this->titleText->setOrigin({bounds.size.x / 2.f, bounds.size.y / 2.f});
-    this->titleText->setPosition({300.f, 200.f}); // center of 600x600 window
+    this->titleText->setPosition({300.f, 200.f});
 
     this->startText = new sf::Text(*this->font);
     this->startText->setString("Press Enter to Play");
     this->startText->setCharacterSize(24);
     this->startText->setFillColor(sf::Color::White);
-    // Center it
     sf::FloatRect startBounds = this->startText->getLocalBounds();
     this->startText->setOrigin({startBounds.size.x / 2.f, startBounds.size.y / 2.f});
     this->startText->setPosition({300.f, 300.f});
+
+    this->gameOverText = new sf::Text(*this->font);
+    this->gameOverText->setString("Game Over! Press Enter to Retry");
+    this->gameOverText->setCharacterSize(30);
+    this->gameOverText->setFillColor(sf::Color::Red);
+    sf::FloatRect gameOverBounds = this->gameOverText->getLocalBounds();
+    this->gameOverText->setOrigin({gameOverBounds.size.x / 2.f, gameOverBounds.size.y / 2.f});
+    this->gameOverText->setPosition({300.f, 300.f});
 }
 
 void Game::initWindow() {
