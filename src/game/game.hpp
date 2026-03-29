@@ -50,6 +50,10 @@ class Game {
 
         // Handle window/keyboard events
         void pollEvents();
+
+        sf::Clock clock;
+        float moveTimer = 0.f;
+        float moveInterval = 0.15f; // move every 0.15 seconds
     public:
         // Constructor
         Game();

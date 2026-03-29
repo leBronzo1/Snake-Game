@@ -10,6 +10,8 @@ Board::Board() {
             grid[i][j] = square::empty;
         }
     }
+
+    
     spawnFood();
 }
 
@@ -28,6 +30,42 @@ void Board::spawnFood() {
             placed = true;
         }
     }
+}
+
+bool Board::update() {
+    snake.updatePos();
+
+    sf::Vector2i head = snake.getHead();
+
+    if (head.x < 0 || head.x >= GRID_SIZE || head.y < 0 || head.y >= GRID_SIZE) {
+        return true; // game over
+    }
+
+    std::deque<sf::Vector2i> body = snake.retVec();
+
+    for (int x = 0; x < GRID_SIZE; x++) {
+        for (int y = 0; y < GRID_SIZE; y++) {
+            sf::Vector2i pos(x, y);
+
+            bool isSnake = false;
+            for (const auto& segment : body) {
+                if (segment == pos) {
+                    isSnake = true;
+                    break;
+                }
+            }
+
+            if (isSnake) {
+                grid[x][y] = square::snaked;
+            } else if (pos == fruitPos) {
+                grid[x][y] = square::fruit;
+            } else {
+                grid[x][y] = square::empty;
+            }
+        }
+    }
+
+    return false;
 }
 
 bool Board::isFood(sf::Vector2i pos) {

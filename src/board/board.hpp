@@ -1,7 +1,6 @@
 #pragma once
 
 #include "../snake/snake.hpp"
-#include <SFML/Graphics.hpp>
 #include <random>
 
 // Defines whether a square in the board has a fruit, snake, or nothing on it
@@ -39,6 +38,9 @@ class Board {
 
         // Spawn food in a random empty cell
         void spawnFood();
+
+        // Update Snake pos and other things
+        bool update();
 
         // Check if a given position is food
         bool isFood(sf::Vector2i pos);

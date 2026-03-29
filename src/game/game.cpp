@@ -78,7 +78,13 @@ void Game::update() {
             // nothing to update on menu
             break;
         case GameState::inGame:
-            // snake.update(), board.update() etc
+            moveTimer += this->clock.restart().asSeconds();
+            if (moveTimer >= moveInterval) {
+                if (b.update()) {
+                    this->state = GameState::GameOver;
+                }
+                moveTimer = 0.f;
+            }
             break;
         case GameState::GameOver:
             // nothing to update on game over
